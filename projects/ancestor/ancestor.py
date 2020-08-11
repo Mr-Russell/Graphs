@@ -1,8 +1,5 @@
 
 def earliest_ancestor(ancestors, starting_node):
-    # Depth first search???
-
-        # Use a stack to find the deepest ancestor
 
     vertices = {}
 
@@ -40,13 +37,12 @@ def earliest_ancestor(ancestors, starting_node):
                 longest = []
                 longest.append(path)
                 length = len(path)
-
         
         else:
-            for child in vertices[last]:
+            for parent in vertices[last]:
                 new_path = path.copy()
 
-                new_path.append(child)
+                new_path.append(parent)
 
                 stack.append(new_path)
     
@@ -61,7 +57,6 @@ def earliest_ancestor(ancestors, starting_node):
     ##### TEST TO PRINT ALL VERTICES
     # for i in vertices:
     #     print(f"{i:3}: {vertices[i]}")
-        
 
     return least
     
@@ -73,4 +68,9 @@ def earliest_ancestor(ancestors, starting_node):
 
 
 
-# earliest_ancestor(test_ancestors, 0)
+# print("Should be -1: ", earliest_ancestor(test_ancestors, 10))
+# print("Should be -1: ",earliest_ancestor(test_ancestors, 4))
+# print("Should be 4: ",earliest_ancestor(test_ancestors, 9))
+# print("Should be 4: ",earliest_ancestor(test_ancestors, 8))
+# print("Should be 10: ",earliest_ancestor(test_ancestors, 6))
+# print("Should be 4: ",earliest_ancestor(test_ancestors, 7))
