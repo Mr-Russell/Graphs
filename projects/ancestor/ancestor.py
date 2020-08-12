@@ -64,13 +64,13 @@ def earliest_ancestor(ancestors, starting_node):
 
 
 
-# test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
+test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
 
 
 
-# print("Should be -1: ", earliest_ancestor(test_ancestors, 10))
-# print("Should be -1: ",earliest_ancestor(test_ancestors, 4))
-# print("Should be 4: ",earliest_ancestor(test_ancestors, 9))
-# print("Should be 4: ",earliest_ancestor(test_ancestors, 8))
-# print("Should be 10: ",earliest_ancestor(test_ancestors, 6))
-# print("Should be 4: ",earliest_ancestor(test_ancestors, 7))
+print("Should be -1: ", earliest_ancestor(test_ancestors, 10))
+print("Should be -1: ",earliest_ancestor(test_ancestors, 4))
+print("Should be 4: ",earliest_ancestor(test_ancestors, 9))
+print("Should be 4: ",earliest_ancestor(test_ancestors, 8))
+print("Should be 10: ",earliest_ancestor(test_ancestors, 6))
+print("Should be 4: ",earliest_ancestor(test_ancestors, 7))
