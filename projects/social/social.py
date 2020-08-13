@@ -102,7 +102,7 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(10, 3)
+    sg.populate_graph(100, 5)
     print("===== FRIENDSHIPS =====")
     for i in sg.friendships:
         print(f"{i:3}: {sg.friendships[i]}")

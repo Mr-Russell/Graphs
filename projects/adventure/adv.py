@@ -21,13 +21,74 @@ room_graph=literal_eval(open(map_file, "r").read())
 world.load_graph(room_graph)
 
 # Print an ASCII map
-world.print_rooms()
+# world.print_rooms()
 
 player = Player(world.starting_room)
 
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
 traversal_path = []
+
+reverse_path = []
+
+reverse = {'n':'s', 's':'n', 'w':'e', 'e':'w'}
+
+graph = {}
+
+current = player.current_room.id
+
+rooms = []
+
+while len(graph) < len(world.rooms):
+    if current not in graph:
+        graph[current] = {}
+        new_room = graph[current]
+        for direction in player.current_room.get_exits():
+            new_room[direction] = '?'
+    
+    for i in graph[current]:
+        room = graph[current]
+        direction = room[i]
+        if direction == '?':
+            # Player travels in that direction
+            player.travel(i)
+            traversal_path.append(i)
+            # Save the previous room
+            previous = current
+            # Current room is updated
+            current = player.current_room.id
+            if current not in graph:
+                graph[current] = {}
+                new_room = graph[current]
+                for x in player.current_room.get_exits():
+                    new_room[x] = '?'
+            # Previous room's map is updated
+            room[i] = current
+
+            reverse_direction = reverse[i]
+            graph[current][reverse_direction] = previous
+            reverse_path.append(reverse_direction)
+            break
+
+    explored = True
+    for i in graph[current]:
+        if graph[current][i] == '?':
+            explored = False
+
+    if explored == True:
+        # Retrace steps to previous room
+        retrace = reverse_path.pop()
+        player.travel(retrace)
+        traversal_path.append(retrace)
+
+        # Current room is updated
+        current = player.current_room.id
+
+
+print("===== GRAPH =====")
+for i in graph:
+    print(f'{i:3}: {graph[i]}')
+
 
 
 
@@ -51,12 +112,12 @@ else:
 #######
 # UNCOMMENT TO WALK AROUND
 #######
-player.current_room.print_room_description(player)
-while True:
-    cmds = input("-> ").lower().split(" ")
-    if cmds[0] in ["n", "s", "e", "w"]:
-        player.travel(cmds[0], True)
-    elif cmds[0] == "q":
-        break
-    else:
-        print("I did not understand that command.")
+# player.current_room.print_room_description(player)
+# while True:
+#     cmds = input("-> ").lower().split(" ")
+#     if cmds[0] in ["n", "s", "e", "w"]:
+#         player.travel(cmds[0], True)
+#     elif cmds[0] == "q":
+#         break
+#     else:
+#         print("I did not understand that command.")
